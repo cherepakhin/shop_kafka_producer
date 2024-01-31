@@ -10,7 +10,7 @@
 ### Цель
 
 Cоздать небольшое приложение на <b>Kotlin</b> с использованием <b>Spring Boot</b> для работы с <b>Kafka</b>.
-Основной проект [https://github.com/cherepakhin/shop_kotlin](https://github.com/cherepakhin/shop_kotlin).
+Связанные проекты: [https://github.com/cherepakhin/shop_kotlin](https://github.com/cherepakhin/shop_kotlin), [https://github.com/cherepakhin/shop_kafka_consumer](https://github.com/cherepakhin/shop_kafka_consumer). 
 Программа будет отправлять описания товаров в очередь Kafka.
 
 <a id="parameters"></a>
