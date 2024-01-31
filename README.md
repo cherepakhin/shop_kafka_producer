@@ -48,6 +48,7 @@ $ ./doc/run-producer.sh product_ext_dto_topic < doc/product.json
 ### Ссылки
 
 - [Основной проект](https://github.com/cherepakhin/shop_kotlin)
+- [Shop Kafka Consumer](https://github.com/cherepakhin/shop_kafka_consumer)
 - [https://www.baeldung.com/rest-template](https://www.baeldung.com/rest-template)
 - [Конфигурирование, запуск и работа с Kafka](http://v.perm.ru/main/index.php/homepage/66-konfigurirovanie-zapusk-i-rabota-s-kafka)
 - [Apache Kafka with Kotlin](https://www.baeldung.com/kotlin/apache-kafka)
