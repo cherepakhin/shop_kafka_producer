@@ -11,6 +11,9 @@ object MapperProductExtDTO {
     }
 
     fun mapFromStringToDto(s :String): ProductExtDTO {
+        if(s.isEmpty()) {
+            throw Exception("Empty string for convert to DTO")
+        }
         return mapper.readValue(s)
     }
 

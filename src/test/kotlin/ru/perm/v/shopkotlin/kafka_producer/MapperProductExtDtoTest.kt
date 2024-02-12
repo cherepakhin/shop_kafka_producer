@@ -1,6 +1,8 @@
 package ru.perm.v.shopkotlin.kafka_producer
 
 import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
 import ru.perm.v.shopkotlin.extdto.ProductExtDTO
 import ru.perm.v.shopkotlin.kafka_producer.mapper.MapperProductExtDTO
@@ -27,5 +29,13 @@ internal class MapperProductExtDtoTest {
         val dto = MapperProductExtDTO.mapFromStringToDto("{\"n\":10,\"name\":\"NAME_1\",\"groupDtoN\":100}")
 
         Assertions.assertEquals(ProductExtDTO(PRODUCT_ID, "NAME_1", GROUP_ID), dto)
+    }
+
+    @Test
+    fun errOnMapFromEmptyStringToDto() {
+        val errorMessage = assertThrows(Exception::class.java) {
+            MapperProductExtDTO.mapFromStringToDto("")
+        }.message
+        assertEquals("Empty string for convert to DTO", errorMessage)
     }
 }
