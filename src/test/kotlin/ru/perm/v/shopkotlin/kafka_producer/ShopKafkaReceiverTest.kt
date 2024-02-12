@@ -1,4 +1,4 @@
-package ru.perm.v.shopkotlin.kafka_sender
+package ru.perm.v.shopkotlin.kafka_producer
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
