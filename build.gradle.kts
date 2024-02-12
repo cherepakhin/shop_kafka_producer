@@ -5,16 +5,54 @@ group = "ru.perm.v"
 version = "0.24.01"
 description = "Shop Kafka Producer"
 val kafkaApiVersion = "3.3.1"
+var springFoxVersion = "3.0.0"
+var shopKotlinExtDtoVersion = "0.0.5"
 
-plugins {
-	id("org.springframework.boot") version "2.5.6"
-	id("io.spring.dependency-management") version "1.0.11.RELEASE"
-	kotlin("jvm") version "1.5.21"
-	kotlin("plugin.spring") version "1.5.21"
+buildscript {
+	var kotlinVersion: String? by extra; kotlinVersion = "1.1.51"
+
+	repositories {
+		mavenCentral()
+	}
+
+	dependencies {
+		classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+	}
+
 }
 
 repositories {
 	mavenCentral()
+	mavenLocal()
+	maven {
+
+		url = uri("http://v.perm.ru:8082/repository/ru.perm.v") //OK
+		isAllowInsecureProtocol = true
+		credentials {
+// export NEXUS_CRED_USR=admin
+// echo $NEXUS_CRED_USR
+			username = System.getenv("NEXUS_CRED_USR") ?: extra.properties["nexus-ci-username"] as String?
+// export NEXUS_CRED_PSW=pass
+// echo $NEXUS_CRED_PSW
+			password = System.getenv("NEXUS_CRED_PSW") ?: extra.properties["nexus-ci-password"] as String?
+//			username = "admin"
+//			password = "pass"
+		}
+	}
+}
+
+plugins {
+	val kotlinVersion = "1.8.21"
+	id("org.springframework.boot") version "2.5.6"
+	id("io.spring.dependency-management") version "1.0.9.RELEASE"
+	kotlin("jvm") version kotlinVersion
+	kotlin("plugin.spring") version kotlinVersion
+	id("maven-publish")
+	id("jacoco")
+	kotlin("kapt") version "1.7.0"
+	java
+	idea
+	application
 }
 
 dependencies {
@@ -23,9 +61,14 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.springframework.kafka:spring-kafka")
+// https://mvnrepository.com/artifact/io.springfox/springfox-boot-starter
+	implementation("io.springfox:springfox-boot-starter:$springFoxVersion")
+// validator
+	implementation("org.hibernate.validator:hibernate-validator")
 // EXAMPLE FOR KAFKA STREAM
 //	implementation("org.apache.kafka:kafka-streams")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	implementation("ru.perm.v:shop_kotlin_extdto:$shopKotlinExtDtoVersion")
 }
 
 tasks.withType<KotlinCompile> {
