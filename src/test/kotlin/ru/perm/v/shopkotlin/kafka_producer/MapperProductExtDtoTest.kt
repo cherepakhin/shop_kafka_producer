@@ -16,8 +16,7 @@ internal class MapperProductExtDtoTest {
         val dto = ProductExtDTO(PRODUCT_ID, "NAME_1", GROUP_ID)
 
         Assertions.assertEquals(
-            "{\"n\":10,\"name\":\"NAME_1\",\"groupDtoN\":100}",
-            MapperProductExtDTO.mapFromDtoToString(dto)
+            "{\"n\":10,\"name\":\"NAME_1\",\"groupDtoN\":100}", MapperProductExtDTO.mapFromDtoToString(dto)
         )
     }
 
@@ -28,7 +27,7 @@ internal class MapperProductExtDtoTest {
 
         val dto = MapperProductExtDTO.mapFromStringToDto("{\"n\":10,\"name\":\"NAME_1\",\"groupDtoN\":100}")
 
-        Assertions.assertEquals(ProductExtDTO(PRODUCT_ID, "NAME_1", GROUP_ID), dto)
+        assertEquals(ProductExtDTO(PRODUCT_ID, "NAME_1", GROUP_ID), dto)
     }
 
     @Test
