@@ -60,6 +60,8 @@ $ ./doc/send_many_messages.sh
 $ ./gradlew bootRun
 ````
 
+### Проверка работы программы
+
 Ручная проверка работоспосоности программы (используется утилита [httpie](https://httpie.io/)):
 
 Простая проверка (echo):
@@ -68,19 +70,25 @@ $ ./gradlew bootRun
 $ http 127.0.0.1:8990/shop_kafka_producer/api/echo/TEST_MESSAGE
 ````
 
-log программы:
-
-````text
-INFO 9476 --- [nio-8990-exec-5] r.p.v.s.kafka_producer.EchoCtrl          : 3 GET TEST_MESSAGE
-INFO 9476 --- [nio-8990-exec-7] r.p.v.s.kafka_producer.EchoCtrl          : 4 GET TEST_MESSAGE
-
-````
-
-Отправка сообщения в очередь через REST:
+Отправка сообщения в topic "text_topic" через REST:
 
 ````shell
 http POST 127.0.0.1:8990/shop_kafka_producer/api/send_text?message=TEST_MESSAGE
 
+````
+
+log программы:
+
+````text
+INFO 5806 --- [nio-8990-exec-9] r.p.v.s.k.rest.KafkaSenderTextRest       : Sent message: TEST_MESSAGE
+
+````
+
+Ручной прием сообщения из топика "text_topic" в консоли:
+
+````shell
+~/tools/kafka/bin/kafka-console-consumer.sh --bootstrap-server 192.168.1.20:9092 --topic text_topic
+>TEST_MESSAGE
 ````
 
 <a id="links"></a>
