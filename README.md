@@ -4,6 +4,7 @@
 [Цель](#target)<br/>
 [Параметры запуска сервера Kafka](#parameters)<br/>
 [Работа из shell](#work_in_shell)<br/>
+[Запуск проекта](#run_project)<br/>
 [Ссылки](#links)<br/>
 
 <a id="target"></a>
@@ -11,15 +12,15 @@
 
 Cоздать небольшое приложение на <b>Kotlin</b> с использованием <b>Spring Boot</b> для работы с <b>Kafka</b>.
 Связанные проекты: [https://github.com/cherepakhin/shop_kotlin](https://github.com/cherepakhin/shop_kotlin), [https://github.com/cherepakhin/shop_kafka_consumer](https://github.com/cherepakhin/shop_kafka_consumer). 
-Программа будет отправлять описания товаров в очередь Kafka.
+Программа будет отправлять описания товаров, принятые через Rest в очередь Kafka. Для приема сообщений для отправки сделан RestController [KafkaSenderProductRest.kt](https://github.com/cherepakhin/shop_kafka_producer/blob/dev/src/main/kotlin/ru/perm/v/shopkotlin/kafka_producer/KafkaSenderProductRest.kt)
 
 <a id="parameters"></a>
 ### Параметры запуска <ins>СЕРВЕРА</ins> Kafka
 
-[Параметры сервера Kafka server.properties](https://github.com/cherepakhin/shop_kafka_receiver/blob/dev/doc/server.properties)
+[Параметры сервера Kafka server.properties](https://github.com/cherepakhin/shop_kafka_producer/blob/src/main/kotlin/)
 
 <a id="work_in_shell"></a>
-### Работа из shell
+### Проверка работы Kafka из shell
 
 Отправка сообщения:
 
@@ -38,7 +39,7 @@ MES
 MES1
 ````
 
-~/tools/kafka/bin/kafka-console-consumer.sh - скрипт из дистрибутива Kafka
+kafka-console-consumer.sh, kafka-console-producer.sh - скрипты из дистрибутива Kafka
 
 Отправка JSON сообщения:
 
@@ -50,6 +51,36 @@ $ ./doc/run-producer.sh product_ext_dto_topic < doc/product.json
 
 ````shell
 $ ./doc/send_many_messages.sh
+````
+
+<a id="run_project"></a>
+### Запуск проекта
+
+````shell
+$ ./gradlew bootRun
+````
+
+Ручная проверка работоспосоности программы (используется утилита [httpie](https://httpie.io/)):
+
+Простая проверка (echo):
+
+````shell
+$ http 127.0.0.1:8990/shop_kafka_producer/api/echo/TEST_MESSAGE
+````
+
+log программы:
+
+````text
+INFO 9476 --- [nio-8990-exec-5] r.p.v.s.kafka_producer.EchoCtrl          : 3 GET TEST_MESSAGE
+INFO 9476 --- [nio-8990-exec-7] r.p.v.s.kafka_producer.EchoCtrl          : 4 GET TEST_MESSAGE
+
+````
+
+Отправка сообщения в очередь через REST:
+
+````shell
+http POST 127.0.0.1:8990/shop_kafka_producer/api/send_text?message=TEST_MESSAGE
+
 ````
 
 <a id="links"></a>

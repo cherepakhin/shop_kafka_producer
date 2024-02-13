@@ -7,6 +7,7 @@ description = "Shop Kafka Producer"
 val kafkaApiVersion = "3.3.1"
 var springFoxVersion = "3.0.0"
 var shopKotlinExtDtoVersion = "0.0.5"
+var mockitoKotlinVersion = "4.0.0"
 
 buildscript {
 	var kotlinVersion: String? by extra; kotlinVersion = "1.1.51"
@@ -61,6 +62,7 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.springframework.kafka:spring-kafka")
+	implementation("org.apache.kafka:kafka-clients:3.4.0")
 // https://mvnrepository.com/artifact/io.springfox/springfox-boot-starter
 	implementation("io.springfox:springfox-boot-starter:$springFoxVersion")
 // validator
@@ -68,6 +70,7 @@ dependencies {
 // EXAMPLE FOR KAFKA STREAM
 //	implementation("org.apache.kafka:kafka-streams")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.mockito.kotlin:mockito-kotlin:$mockitoKotlinVersion")
 	implementation("ru.perm.v:shop_kotlin_extdto:$shopKotlinExtDtoVersion")
 }
 
