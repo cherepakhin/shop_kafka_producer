@@ -91,6 +91,9 @@ INFO 5806 --- [nio-8990-exec-9] r.p.v.s.k.rest.KafkaSenderTextRest       : Sent 
 >TEST_MESSAGE
 ````
 
+### TODO: sendJSON 
+### TODO: create receivers
+
 <a id="links"></a>
 ### Ссылки
 
