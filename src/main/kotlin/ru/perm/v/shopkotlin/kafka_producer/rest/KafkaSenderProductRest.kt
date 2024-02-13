@@ -1,4 +1,4 @@
-package ru.perm.v.shopkotlin.kafka_producer
+package ru.perm.v.shopkotlin.kafka_producer.rest
 
 import io.swagger.annotations.ApiOperation
 import io.swagger.v3.oas.annotations.Parameter
@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import ru.perm.v.shopkotlin.extdto.ProductExtDTO
+import ru.perm.v.shopkotlin.kafka_producer.service.KafkaProducerProductTopicService
 import javax.validation.ConstraintViolation
 import javax.validation.Validation
 

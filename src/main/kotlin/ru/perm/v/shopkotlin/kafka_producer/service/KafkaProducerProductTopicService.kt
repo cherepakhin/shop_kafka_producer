@@ -1,4 +1,4 @@
-package ru.perm.v.shopkotlin.kafka_producer
+package ru.perm.v.shopkotlin.kafka_producer.service
 
 import org.slf4j.LoggerFactory
 import org.springframework.kafka.core.KafkaTemplate

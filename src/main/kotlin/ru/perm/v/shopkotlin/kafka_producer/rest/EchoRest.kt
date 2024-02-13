@@ -1,4 +1,4 @@
-package ru.perm.v.shopkotlin.kafka_producer
+package ru.perm.v.shopkotlin.kafka_producer.rest
 
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/echo")
 @Api(tags = ["Echo for test"])
-class EchoCtrl {
+class EchoRest {
     private val logger = LoggerFactory.getLogger(this.javaClass.name)
     private var counter = 0L
     private val MaxValueCounter = 100000L // for yandex_tank test

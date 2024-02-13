@@ -1,6 +1,5 @@
-package ru.perm.v.shopkotlin.kafka_producer
+package ru.perm.v.shopkotlin.kafka_producer.service
 
-import jdk.jfr.Event
 import org.apache.kafka.clients.producer.Producer
 import org.apache.kafka.clients.producer.ProducerRecord
 import org.junit.jupiter.api.Test

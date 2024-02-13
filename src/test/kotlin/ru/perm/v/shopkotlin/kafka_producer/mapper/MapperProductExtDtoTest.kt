@@ -1,11 +1,10 @@
-package ru.perm.v.shopkotlin.kafka_producer
+package ru.perm.v.shopkotlin.kafka_producer.mapper
 
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
 import ru.perm.v.shopkotlin.extdto.ProductExtDTO
-import ru.perm.v.shopkotlin.kafka_producer.mapper.MapperProductExtDTO
 
 internal class MapperProductExtDtoTest {
     @Test
