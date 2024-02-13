@@ -30,7 +30,7 @@ Cоздать небольшое приложение на <b>Kotlin</b> с ис
 >
 ````
 
-Прием сообщения:
+Запуск kafka-console-consumer для приема сообщений:
 
 ````shell
 ~$ ~/tools/kafka/bin/kafka-console-consumer.sh --bootstrap-server 192.168.1.20:9092 --topic samples
@@ -38,10 +38,18 @@ MES
 MES1
 ````
 
+~/tools/kafka/bin/kafka-console-consumer.sh - скрипт из дистрибутива Kafka
+
 Отправка JSON сообщения:
 
 ````shell
 $ ./doc/run-producer.sh product_ext_dto_topic < doc/product.json
+````
+
+Отправка нескольких JSON сообщений:
+
+````shell
+$ ./doc/send_many_messages.sh
 ````
 
 <a id="links"></a>
