@@ -91,7 +91,22 @@ INFO 5806 --- [nio-8990-exec-9] r.p.v.s.k.rest.KafkaSenderTextRest       : Sent 
 >TEST_MESSAGE
 ````
 
-### TODO: sendJSON 
+### Отправка JSON сообщения  через REST 
+
+в topic "product_ext_dto_topic" с "кастомным" конвертированием: 
+
+````shell
+http POST :8990/shop_kafka_producer/api/send_product/manual < doc/product.json
+
+````
+
+в topic "product_ext_dto_topic" с конвертированием через org.springframework.messaging.support.MessageBuilder:
+
+````shell
+http POST :8990/shop_kafka_producer/api/send_product/builder < doc/product.json
+
+````
+
 ### TODO: create receivers
 
 <a id="links"></a>

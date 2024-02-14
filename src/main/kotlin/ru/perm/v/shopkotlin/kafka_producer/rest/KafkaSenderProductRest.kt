@@ -2,6 +2,7 @@ package ru.perm.v.shopkotlin.kafka_producer.rest
 
 import io.swagger.annotations.ApiOperation
 import io.swagger.v3.oas.annotations.Parameter
+import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -15,9 +16,24 @@ import javax.validation.Validation
 @RequestMapping("/send_product")
 class KafkaSenderProductRest(val kafkaProducerProductTopicService: KafkaProducerProductTopicService) {
 
+    private val logger = LoggerFactory.getLogger(this.javaClass.name)
+
     val validator: javax.validation.Validator = Validation.buildDefaultValidatorFactory().validator
-    @PostMapping
-    @ApiOperation("Send Product DTO to Kafka product_ext_dto_topic")
+    @PostMapping("/manual")
+    @ApiOperation("Send Product DTO to Kafka product_ext_dto_topic with manual convert")
+    fun sendProductManualConvert(
+        @Parameter(
+            description = "DTO of Product."
+        )
+        @RequestBody productExtDTO: ProductExtDTO
+    ): String {
+        validate(productExtDTO)
+        logger.info("Sent with manual convert. $productExtDTO")
+        return kafkaProducerProductTopicService.sendWithManualConvert(productExtDTO)
+    }
+
+    @PostMapping("/builder")
+    @ApiOperation("Send Product DTO to Kafka product_ext_dto_topic with message builder convert")
     fun sendProduct(
         @Parameter(
             description = "DTO of Product."
@@ -25,7 +41,9 @@ class KafkaSenderProductRest(val kafkaProducerProductTopicService: KafkaProducer
         @RequestBody productExtDTO: ProductExtDTO
     ): String {
         validate(productExtDTO)
-        return kafkaProducerProductTopicService.send(productExtDTO)
+        logger.info("Sent with MessageBuilder. $productExtDTO")
+//        return "OK"
+        return kafkaProducerProductTopicService.sendWithMessageBuilder(productExtDTO)
     }
 
     fun validate(productExtDTO: ProductExtDTO) {
