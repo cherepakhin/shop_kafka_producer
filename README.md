@@ -5,6 +5,7 @@
 [Параметры запуска сервера Kafka](#parameters)<br/>
 [Работа из shell](#work_in_shell)<br/>
 [Запуск проекта](#run_project)<br/>
+[Создание запускаемого файла и его запуск](#create_runable)<br/>
 [Ссылки](#links)<br/>
 
 <a id="target"></a>
@@ -119,6 +120,34 @@ http POST :8990/shop_kafka_producer/api/send_product/builder < doc/product.json
 ### Проект для приема сообщений
 
 [Shop Kafka Consumer](https://github.com/cherepakhin/shop_kafka_consumer)
+
+<a id="create_runable"></a>
+### Создание запускаемого файла и его запуск
+
+Создание:
+
+````shell
+./gradlew bootJar
+````
+(**bootJar** не **bootRun!!!**)
+
+Собранный файл будет в папке **./build/libs/**. Размер ~50 Mb.
+
+запуск с RAM 256Мб:
+
+````shell
+shop_kafka_producer/$ java -Xmx256M -jar build/libs/shop_kafka_producer-0.24.01.jar
+````
+
+или так:
+
+````shell
+cd shop_kotlin/build/libs 
+shop_kotlin/build/libs$ java -Xmx256M -jar shop_kafka_producer-0.24.01.jar
+````
+
+-Xmx256M - ограничение ОЗУ
+"0.24.01" - версия проекта 
 
 <a id="links"></a>
 ### Ссылки
