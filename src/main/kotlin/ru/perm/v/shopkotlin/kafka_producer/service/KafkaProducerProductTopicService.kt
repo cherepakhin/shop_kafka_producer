@@ -40,8 +40,16 @@ class KafkaProducerProductTopicService(
             .setHeader(KafkaHeaders.TOPIC, PRODUCT_EXT_TOPIC_NAME)
 //            .setHeader("X-Custom-Header", "Custom header here")
             .build()
-        val result = kafkaTemplate.send(message)
-        return result.toString()
+        val future = kafkaTemplate.send(message)
+        future.get().producerRecord?.let { record ->
+            val logMessage = "Sent to topic \"${record.topic()}\" message: \"${record.value()}\"\n"
+            logger.info(logMessage)
+            return logMessage
+        } ?: run {
+            val logMessage = "Failed to send message to topic $PRODUCT_EXT_TOPIC_NAME"
+            logger.error(logMessage)
+            return logMessage
+        }
     }
 
     fun convertProductExtDTOToString(productExtDTO: ProductExtDTO): String {
