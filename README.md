@@ -91,6 +91,13 @@ INFO 5806 --- [nio-8990-exec-9] r.p.v.s.k.rest.KafkaSenderTextRest       : Sent 
 >TEST_MESSAGE
 ````
 
+Ручной прием сообщения из топика "product_ext_dto_topic" в консоли:
+
+````shell
+~/tools/kafka/bin/kafka-console-consumer.sh --bootstrap-server 192.168.1.20:9092 --topic product_ext_dto_topic
+>
+````
+
 ### Отправка JSON сообщения  через REST 
 
 в topic "product_ext_dto_topic" с "кастомным" конвертированием: 
