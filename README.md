@@ -22,6 +22,8 @@ Cоздать небольшое приложение на <b>Kotlin</b> с ис
 <a id="work_in_shell"></a>
 ### Проверка работы Kafka из shell
 
+192.168.1.20 - IP адрес сервера Kafka
+
 Отправка сообщения:
 
 ````shell
@@ -114,7 +116,9 @@ http POST :8990/shop_kafka_producer/api/send_product/builder < doc/product.json
 
 ````
 
-### TODO: create receivers
+### Проект для приема сообщений
+
+[Shop Kafka Consumer](https://github.com/cherepakhin/shop_kafka_consumer)
 
 <a id="links"></a>
 ### Ссылки
