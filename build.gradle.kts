@@ -1,8 +1,9 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 group = "ru.perm.v"
 // change version on publishing
-version = "0.15.02"
+version = "0.15.02.2"
 description = "Shop Kafka Producer"
 val kafkaApiVersion = "3.3.1"
 var springFoxVersion = "3.0.0"
@@ -69,9 +70,10 @@ dependencies {
 	implementation("org.hibernate.validator:hibernate-validator")
 // EXAMPLE FOR KAFKA STREAM
 //	implementation("org.apache.kafka:kafka-streams")
+	implementation("ru.perm.v:shop_kotlin_extdto:$shopKotlinExtDtoVersion")
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.mockito.kotlin:mockito-kotlin:$mockitoKotlinVersion")
-	implementation("ru.perm.v:shop_kotlin_extdto:$shopKotlinExtDtoVersion")
 }
 
 tasks.withType<KotlinCompile> {
@@ -83,4 +85,30 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+// Configure Spring Boot plugin task for running the application.
+val bootJar by tasks.getting(BootJar::class) {
+	enabled = true
+}
+
+publishing {
+	repositories {
+		maven {
+			url = uri("http://v.perm.ru:8082/repository/ru.perm.v/")
+			isAllowInsecureProtocol = true
+			//  publish в nexus "./gradlew publish" из ноута и Jenkins проходит
+			// export NEXUS_CRED_USR=admin
+			// echo $NEXUS_CRED_USR
+			credentials {
+				username = System.getenv("NEXUS_CRED_USR")
+				password = System.getenv("NEXUS_CRED_PSW")
+			}
+		}
+	}
+	publications {
+		create<MavenPublication>("maven") {
+			artifact(tasks["bootJar"])
+		}
+	}
 }
