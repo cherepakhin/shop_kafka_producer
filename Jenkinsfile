@@ -14,13 +14,7 @@ pipeline {
 
         stage('Unit tests') {
             steps {
-                sh 'pwd;cd shop_kafka_producer;./gradlew clean test --tests *Test'
-            }
-        }
-
-        stage('Integration tests') {
-            steps {
-                sh 'pwd;cd shop_kafka_producer;./gradlew clean test --tests *TestIntegration'
+                sh 'pwd;cd shop_kafka_producer;./gradlew clean test'
             }
         }
 
