@@ -117,6 +117,18 @@ http POST :8990/shop_kafka_producer/api/send_product/builder < doc/product.json
 
 ````
 
+Отправка массива сообщений с помощью httpie:
+
+````shell
+shop_kafka_producer/doc$ http POST http://127.0.0.1:8990/shop_kafka_producer/api/send_product/echo/array_message < ./list_10products.json
+````
+
+log:
+
+````shell
+INFO 18890 --- [nio-8990-exec-1] r.p.v.s.k.rest.KafkaSenderProductRest    : Received 10 products
+````
+
 ### Проект для приема сообщений
 
 [Shop Kafka Consumer](https://github.com/cherepakhin/shop_kafka_consumer)
