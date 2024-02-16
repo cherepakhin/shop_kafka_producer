@@ -1,4 +1,6 @@
 # run from ./shop_kafka_producer directory
+# send by one message at a time
+
 max=10
 for i in $(seq 1 $max)
 do

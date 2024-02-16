@@ -1,1 +1,1 @@
-httpie POST http://127.0.0.1:8990/send-list
+http POST http://127.0.0.1:8990/shop_kafka_producer/api/send_product/echo/array_message < ./doc/list_10products.json
