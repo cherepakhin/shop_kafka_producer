@@ -120,7 +120,7 @@ http POST :8990/shop_kafka_producer/api/send_product/builder < doc/product.json
 Отправка массива сообщений с помощью httpie:
 
 ````shell
-shop_kafka_producer/doc$ http POST http://127.0.0.1:8990/shop_kafka_producer/api/send_product/echo/array_message < ./list_10products.json
+$ http POST http://127.0.0.1:8990/shop_kafka_producer/api/send_product/echo/array_message < ./doc/list_10products.json
 ````
 
 log:
