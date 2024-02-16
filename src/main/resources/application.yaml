@@ -21,3 +21,36 @@ spring:
     consumer:
       properties:
         spring.json.trusted.packages: "*"
+
+management:
+  health:
+    probes:
+      enabled: true
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+    health:
+      show-details: always
+      enabled: true
+    caches:
+      enabled: true
+    info:
+      enabled: true
+      show-details: always
+    beans:
+      enabled: true
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: "/shop_kafka_producer/api/actuator"
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  server:
+    port: 8991
+

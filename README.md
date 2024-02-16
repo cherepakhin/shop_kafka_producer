@@ -6,6 +6,7 @@
 [Работа из shell](#work_in_shell)<br/>
 [Запуск проекта](#run_project)<br/>
 [Создание запускаемого файла и его запуск](#create_runable)<br/>
+[Spring Actuator](#actuator)
 [Ссылки](#links)<br/>
 
 <a id="target"></a>
@@ -160,6 +161,21 @@ shop_kotlin/build/libs$ java -Xmx256M -jar shop_kafka_producer-0.24.01.jar
 
 -Xmx256M - ограничение ОЗУ
 "0.24.01" - версия проекта 
+
+<a id="actuator"></a>
+### Spring Actuator
+
+Подключен к порту 8991 
+
+````shell
+$ http http://127.0.0.1:8991/shop_kafka_producer/api/actuator/
+````
+
+Prometheus:
+
+````shell
+$ http http://127.0.0.1:8991/shop_kafka_producer/api/actuator/prometheus
+````
 
 <a id="links"></a>
 ### Ссылки

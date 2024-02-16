@@ -58,7 +58,10 @@ plugins {
 }
 
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-web") {
+		exclude("org.springframework.boot:spring-boot-starter-tomcat")
+	}
+	implementation("org.springframework.boot:spring-boot-starter-jetty") // jetty uses less memory
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
@@ -71,6 +74,12 @@ dependencies {
 // EXAMPLE FOR KAFKA STREAM
 //	implementation("org.apache.kafka:kafka-streams")
 	implementation("ru.perm.v:shop_kotlin_extdto:$shopKotlinExtDtoVersion")
+
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
+// prometheus - metrics
+	implementation("io.micrometer:micrometer-registry-prometheus")
+
+	annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.mockito.kotlin:mockito-kotlin:$mockitoKotlinVersion")
