@@ -7,22 +7,24 @@ import org.mockito.Mockito.`when`
 import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.kafka.support.SendResult
 import org.springframework.util.concurrent.SettableListenableFuture
+import ru.perm.v.shopkotlin.extdto.ProductExtDTO
 
 
-class KafkaProducerTextTopicServiceMockTest {
+class KafkaProducerProductTopicServiceMockTest {
     @Test
-    fun sendStringMessage() {
+    fun sendWithManualConvert() {
         val mockTemplate = Mockito.mock(KafkaTemplate::class.java) as KafkaTemplate<String, String>
         val service =
-            KafkaProducerTextTopicService(kafkaTemplate = mockTemplate)
+            KafkaProducerProductTopicService(kafkaTemplate = mockTemplate)
 
-        val TOPIC_NAME = "text_topic"
+        val TOPIC_NAME = "product_ext_dto_topic"
         val future = SettableListenableFuture<SendResult<String, String>>()
-        `when`(mockTemplate.send(TOPIC_NAME, "MESSAGE")).thenReturn(future);
+        `when`(mockTemplate.send(TOPIC_NAME, "{\"n\":10,\"name\":\"name\",\"groupDtoN\":100}")).thenReturn(future);
 
-        service.sendStringMessage("MESSAGE")
+        val productDto = ProductExtDTO(10, "name", 100)
+        service.sendWithManualConvert(productDto)
 
-        verify(mockTemplate).send(TOPIC_NAME, "MESSAGE")
+        verify(mockTemplate).send(TOPIC_NAME, "{\"n\":10,\"name\":\"name\",\"groupDtoN\":100}")
     }
 
 }
