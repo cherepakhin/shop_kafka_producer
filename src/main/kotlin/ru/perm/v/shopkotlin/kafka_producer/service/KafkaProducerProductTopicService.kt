@@ -28,6 +28,7 @@ class KafkaProducerProductTopicService(
     }
 
     fun sendStringToTopic(message: String): String {
+        logger.info("Send message: $message")
         val result =
             kafkaTemplate.send(PRODUCT_EXT_TOPIC_NAME, message)
         return result.toString()
