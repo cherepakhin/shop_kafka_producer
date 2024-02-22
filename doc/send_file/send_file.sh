@@ -9,6 +9,6 @@
 #{"n": 4, "name": "NAME_4", "groupDtoN":100}
 #{"n": 101, "name": "NAME_101", "groupDtoN":100}
 
-# run from directory: doc/send_file/
+# run from project directory: ./
 
-cat ./list_products.txt | /opt/kafka/bin/kafka-console-producer.sh --broker-list 192.168.1.20:9092 --topic product_ext_dto_topic
+cat doc/send_file/list_products.txt | /opt/kafka/bin/kafka-console-producer.sh --broker-list 192.168.1.20:9092 --topic product_ext_dto_topic
