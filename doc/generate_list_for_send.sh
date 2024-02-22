@@ -1,7 +1,7 @@
 # Generate list for send to /echo/array_message and etc...
 
 max=100
-json_file="list_10_products.json"
+json_file="list_products.json"
 echo -ne "[\n" > $json_file
 for i in $(seq 1 $max)
 do
