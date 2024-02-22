@@ -5,10 +5,10 @@ import org.springframework.boot.runApplication
 
 @SpringBootApplication
 class ShopKafkaProducerApp {
-  companion object {
-    @JvmStatic
-    fun main(args: Array<String>) {
-      runApplication<ShopKafkaProducerApp>(*args)
+    companion object {
+        @JvmStatic
+        fun main(args: Array<String>) {
+            runApplication<ShopKafkaProducerApp>(*args)
+        }
     }
-  }
 }

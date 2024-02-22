@@ -4,11 +4,14 @@ package ru.perm.v.shopkotlin.kafka_producer.service
 import org.slf4j.LoggerFactory
 import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.kafka.support.KafkaHeaders
+import org.springframework.kafka.support.SendResult
 import org.springframework.messaging.Message
 import org.springframework.messaging.support.MessageBuilder
 import org.springframework.stereotype.Component
+import org.springframework.util.concurrent.ListenableFutureCallback
 import ru.perm.v.shopkotlin.extdto.ProductExtDTO
 import ru.perm.v.shopkotlin.kafka_producer.mapper.MapperProductExtDTO
+
 
 @Component
 class KafkaProducerProductTopicService(
@@ -29,10 +32,33 @@ class KafkaProducerProductTopicService(
 
     fun sendStringToTopic(message: String): String {
         logger.info("Send message: $message")
-        val result =
+        val futureResult =
             kafkaTemplate.send(PRODUCT_EXT_TOPIC_NAME, message)
-        return result.toString()
+        var result = ""
+        futureResult.addCallback(
+            object : ListenableFutureCallback<SendResult<String?, String?>?> {
+                override fun onSuccess(stringKafkaBeanSendResult: SendResult<String?, String?>?) {
+                    val recordMetadata = stringKafkaBeanSendResult!!.recordMetadata
+                    logger.info("SUCCESS============ $recordMetadata")
+
+                    logger.info("RESULT SENT message $message to topic $PRODUCT_EXT_TOPIC_NAME")
+                    val logMessage =
+                        "RECORD MEATADATA: topic:${recordMetadata.topic()} partition:${recordMetadata.partition()} offset:${recordMetadata.offset()}"
+                    logger.info(logMessage)
+                    result = logMessage
+                }
+
+                override fun onFailure(throwable: Throwable) {
+                    logger.error("ERROR============ $throwable")
+                    val logMessage =
+                        "ERROR RESULT SENT message = $message to topic %PRODUCT_EXT_TOPIC_NAME because of error $throwable.message"
+                    logger.error(logMessage)
+                    result = logMessage
+                }
+            })
+        return result
     }
+
 
     fun sendWithMessageBuilder(productExtDTO: ProductExtDTO): String {
         logger.info("Send to topic $PRODUCT_EXT_TOPIC_NAME message: $productExtDTO")

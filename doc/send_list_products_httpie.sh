@@ -1,5 +1,5 @@
-max=1000
-json_file="list_10_products.json"
+max=1
+json_file="list_products.json"
 echo -ne "[\n" > $json_file
 for i in $(seq 1 $max)
 do

@@ -54,3 +54,8 @@ management:
   server:
     port: 8991
 
+logging:
+  level:
+    root: info
+  file:
+    path: log/
