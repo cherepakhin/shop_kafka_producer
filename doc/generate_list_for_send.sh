@@ -1,13 +1,14 @@
 # Generate list for send to /echo/array_message and etc...
 
-max=100
-json_file="test_list_products.txt"
+max=10000
+json_file="list_products.txt"
 # uncomment the next line if you want to generate a new file with the array json
 # [{...},{...}]
 # echo -ne "[\n" > $json_file
 for i in $(seq 1 $max)
 do
-    echo "{\"n\": $i, \"name\": \"NAME_$i\", \"groupDtoN\":100}" >> $json_file
+#  echo "{\"n\": $i, \"name\": \"NAME_$i\", \"groupDtoN\":100}"
+   echo "{\"n\": $i, \"name\": \"NAME_$i\", \"groupDtoN\":100}" >> $json_file
 # uncomment the next line if you want to generate a new file with the array json
 # [{...},{...}]
 #   echo -ne ",\n" >> $json_file
